@@ -21,6 +21,6 @@ Libraries/Frameworks:
 JDA (Java Discord API) or Telegram API: to deploy the chatbot on messaging platforms (further development).
 Spring Boot: For creating a standalone application with REST APIs if needed(further development).
 Java SDK: For running PowerShell commands from Java.
-JUnit: For testing.
+JUnit: For testing purposes.
 
 
