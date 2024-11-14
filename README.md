@@ -1,7 +1,7 @@
 # PowerShellSupportChatBot
 I work in team that use Powershell to monitor, update and fix any issues with M365 Communications. I would like to create  a chatbot that could help team members with powershell problems and solutions. 
 
-// The following is the intial plan for a Powershell Support Chatbot. The project is likely to evolve and deviate from the original idea.
+// The following is the intial plan for a Powershell Support Chatbot. The project is likely to evolve and deviate from the original idea. I will use issues to keep on track; creating new issues if there is a change to the plan.
 
 The chatbot will:
 
@@ -14,9 +14,9 @@ Tech Stack
 Java: Primary programming language for the chatbot.
 IntelliJ IDEA: Integrated Development Environment (IDE) for writing and managing Java code.
 GitHub: Version control for code collaboration and management.
-PowerShell: The scripting language you'll be helping with.
+PowerShell: The scripting language the chatbot will be helping with.
 
 Libraries/Frameworks:
-JDA (Java Discord API) or Telegram API: If you want to deploy the chatbot on messaging platforms.
-Spring Boot: For creating a standalone application with REST APIs if needed.
+JDA (Java Discord API) or Telegram API: to deploy the chatbot on messaging platforms (further development).
+Spring Boot: For creating a standalone application with REST APIs if needed(further development).
 Java SDK: For running PowerShell commands from Java.
