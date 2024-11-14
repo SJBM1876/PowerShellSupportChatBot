@@ -1,51 +1,45 @@
 package chatbot;
 
-// Importing the Scanner class for reading user input from the console
 import java.util.Scanner;
 
 public class PowerShellChatbot {
-    // Declaring a private final instance of CommandHandler
-    // This will be used to process user commands
-    private final CommandHandler commandHandler;
+    private final CommandHandler commandHandler; // Handles user input related to PowerShell commands
+    private final ResponseGenerator responseGenerator; // Generates friendly responses for the chatbot
 
-    // Constructor for PowerShellChatbot
-    // It initializes the commandHandler instance
+    // Constructor: Initializes the CommandHandler and ResponseGenerator classes
     public PowerShellChatbot() {
-        // Creating a new CommandHandler object to handle PowerShell commands
         this.commandHandler = new CommandHandler();
+        this.responseGenerator = new ResponseGenerator();
     }
 
-    // Method to start the chatbot interaction with the user
+    // This method starts the chatbot and handles the interaction with the user
     public void start() {
-        // Creating a Scanner object to read input from the console
-        Scanner scanner = new Scanner(System.in);
-        // Displaying a welcome message to the user
-        System.out.println("How can I help you with PowerShell today?");
+        Scanner scanner = new Scanner(System.in); // Used to read user input from the console
+        System.out.println(responseGenerator.generateHelpMessage()); // Show help message when the chatbot starts
 
-        // Starting an infinite loop to keep the chatbot running until the user decides to exit
+        // Infinite loop to continuously accept user input until the user decides to exit
         while (true) {
-            // Prompting the user for input
-            System.out.print("> ");
+            System.out.print("> "); // Prompt for user input
+            String userInput = scanner.nextLine(); // Read a line of input from the user
 
-            // Reading the user's input as a line of text
-            String userInput = scanner.nextLine();
-
-            // Checking if the user wants to exit the chatbot
+            // Check if the user wants to exit the chatbot
             if (userInput.equalsIgnoreCase("exit")) {
-                // If the user types "exit", print a goodbye message and break the loop
-                System.out.println("Goodbye!");
-                break; // Exits the while loop, ending the chatbot session
+                System.out.println(responseGenerator.generateExitMessage()); // Show a farewell message
+                break; // Exit the loop, ending the chatbot session
             }
 
-            // Using the CommandHandler to process the user's input and generate a response
-            String response = commandHandler.handleCommand(userInput);
+            // Handle the user's input using the CommandHandler
+            String command = commandHandler.handleCommand(userInput);
 
-            // Displaying the response back to the user
+            // Generate a response using the ResponseGenerator
+            String response = responseGenerator.generateResponse(command);
+
+            // Display the generated response to the user
             System.out.println(response);
         }
 
-        // Closing the Scanner to release system resources
+        // Close the Scanner object to release resources
         scanner.close();
-
     }
 }
+

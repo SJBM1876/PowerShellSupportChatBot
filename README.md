@@ -5,6 +5,7 @@ I work in team that use Powershell to monitor, update and fix any issues with M3
 
 The chatbot will:
 
+Initially run in the command line interface.
 Respond to PowerShell queries: Provide solutions, examples, or explanations for PowerShell commands.
 Help with troubleshooting: Assist in resolving issues with M365 communications by suggesting relevant PowerShell commands or scripts.
 Integration with GitHub: Push updates, store frequently used PowerShell scripts, and track issues.
@@ -20,3 +21,6 @@ Libraries/Frameworks:
 JDA (Java Discord API) or Telegram API: to deploy the chatbot on messaging platforms (further development).
 Spring Boot: For creating a standalone application with REST APIs if needed(further development).
 Java SDK: For running PowerShell commands from Java.
+JUnit: For testing.
+
+

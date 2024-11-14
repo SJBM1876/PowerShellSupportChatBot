@@ -1,46 +1,39 @@
 package chatbot;
 
-import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 
-public class PowerShellChatbot {
-    private final CommandHandler commandHandler; // Handles user input related to PowerShell commands
-    private final ResponseGenerator responseGenerator; // Generates friendly responses for the chatbot
+public class CommandHandler {
+    private final Map<String, String> commandMap;
 
-    // Constructor: Initializes the CommandHandler and ResponseGenerator classes
-    public PowerShellChatbot() {
-        this.commandHandler = new CommandHandler();
-        this.responseGenerator = new ResponseGenerator();
+    // Constructor: Initializes the PowerShell command mappings
+    public CommandHandler() {
+        commandMap = new HashMap<>();
+        initializeCommands();
     }
 
-    // This method starts the chatbot and handles the interaction with the user
-    public void start() {
-        Scanner scanner = new Scanner(System.in); // Used to read user input from the console
-        System.out.println(responseGenerator.generateHelpMessage()); // Show help message when the chatbot starts
+    // Method to define common PowerShell commands
+    private void initializeCommands() {
+        commandMap.put("get user", "Get-MsolUser -UserPrincipalName <user>@domain.com");
+        commandMap.put("reset password", "Set-MsolUserPassword -UserPrincipalName <user>@domain.com -NewPassword <NewPassword> -ForceChangePassword $true");
+        commandMap.put("list groups", "Get-MsolGroup");
+        commandMap.put("get mailbox", "Get-Mailbox -Identity <user>@domain.com");
+    }
 
-        // Infinite loop to continuously accept user input until the user decides to exit
-        while (true) {
-            System.out.print("> "); // Prompt for user input
-            String userInput = scanner.nextLine(); // Read a line of input from the user
+    // Method to process user input and return a matching PowerShell command
+    public String handleCommand(String userInput) {
+        String lowerInput = userInput.toLowerCase();
 
-            // Check if the user wants to exit the chatbot
-            if (userInput.equalsIgnoreCase("exit")) {
-                System.out.println(responseGenerator.generateExitMessage()); // Show a farewell message
-                break; // Exit the loop, ending the chatbot session
+        // Check if user input matches any predefined command
+        for (String key : commandMap.keySet()) {
+            if (lowerInput.contains(key)) {
+                return commandMap.get(key);
             }
-
-            // Handle the user's input using the CommandHandler
-            String command = commandHandler.handleCommand(userInput);
-
-            // Generate a response using the ResponseGenerator
-            String response = responseGenerator.generateResponse(command);
-
-            // Display the generated response to the user
-            System.out.println(response);
         }
-
-        // Close the Scanner object to release resources
-        scanner.close();
+        // If no match is found, return null
+        return null;
     }
 }
+
 
 
