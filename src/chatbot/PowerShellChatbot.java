@@ -1,45 +1,60 @@
 package chatbot;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class PowerShellChatbot {
-    private final CommandHandler commandHandler; // Handles user input related to PowerShell commands
-    private final ResponseGenerator responseGenerator; // Generates friendly responses for the chatbot
+    private final CommandHandler commandHandler;
+    private final ResponseGenerator responseGenerator;
+    private final OpenAIClient openAIClient;
 
-    // Constructor: Initializes the CommandHandler and ResponseGenerator classes
     public PowerShellChatbot() {
         this.commandHandler = new CommandHandler();
         this.responseGenerator = new ResponseGenerator();
+        this.openAIClient = new OpenAIClient();
     }
 
-    // This method starts the chatbot and handles the interaction with the user
     public void start() {
-        Scanner scanner = new Scanner(System.in); // Used to read user input from the console
-        System.out.println(responseGenerator.generateHelpMessage()); // Show help message when the chatbot starts
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(responseGenerator.generateHelpMessage());
 
-        // Infinite loop to continuously accept user input until the user decides to exit
         while (true) {
-            System.out.print("> "); // Prompt for user input
-            String userInput = scanner.nextLine(); // Read a line of input from the user
+            System.out.print("> ");
+            String userInput = scanner.nextLine();
 
-            // Check if the user wants to exit the chatbot
             if (userInput.equalsIgnoreCase("exit")) {
-                System.out.println(responseGenerator.generateExitMessage()); // Show a farewell message
-                break; // Exit the loop, ending the chatbot session
+                System.out.println(responseGenerator.generateExitMessage());
+                break;
             }
 
-            // Handle the user's input using the CommandHandler
+            // Check if the user input matches a PowerShell command
             String command = commandHandler.handleCommand(userInput);
+            String response;
 
-            // Generate a response using the ResponseGenerator
-            String response = responseGenerator.generateResponse(command);
+            if (command != null) {
+                response = responseGenerator.generateResponse(command);
+            } else {
+                // Get a response from OpenAI's API if no PowerShell command matches
+                try {
+                    response = openAIClient.getAIResponse(userInput);
+                } catch (IOException e) {
+                    response = "Sorry, there was an error connecting to the AI service.";
+                }
+            }
 
-            // Display the generated response to the user
             System.out.println(response);
         }
-
-        // Close the Scanner object to release resources
         scanner.close();
     }
 }
+
+
+
+
+
+
+
+
+
+
 
