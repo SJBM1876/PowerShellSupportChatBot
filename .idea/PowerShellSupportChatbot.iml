@@ -12,5 +12,6 @@
     <orderEntry type="library" name="json" level="project" />
     <orderEntry type="library" name="io.github.cdimascio.java.dotenv" level="project" />
     <orderEntry type="library" name="tesults.junit5" level="project" />
+    <orderEntry type="library" name="mockito.junit.jupiter" level="project" />
   </component>
 </module>

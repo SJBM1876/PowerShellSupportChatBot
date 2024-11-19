@@ -63,6 +63,7 @@ public class OpenAIClient {
         }
         return text.trim(); // If there's no period, return the original text
     }
+
 }
 
 
