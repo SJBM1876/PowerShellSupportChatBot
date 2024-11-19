@@ -11,5 +11,6 @@
     <orderEntry type="library" name="json4s.jackson.core_3" level="project" />
     <orderEntry type="library" name="json" level="project" />
     <orderEntry type="library" name="io.github.cdimascio.java.dotenv" level="project" />
+    <orderEntry type="library" name="tesults.junit5" level="project" />
   </component>
 </module>
