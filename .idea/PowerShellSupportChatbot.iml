@@ -10,5 +10,6 @@
     <orderEntry type="library" name="squareup.okhttp3.okhttp" level="project" />
     <orderEntry type="library" name="json4s.jackson.core_3" level="project" />
     <orderEntry type="library" name="json" level="project" />
+    <orderEntry type="library" name="io.github.cdimascio.java.dotenv" level="project" />
   </component>
 </module>
