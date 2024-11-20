@@ -1,0 +1,12 @@
+{
+  "name": "powershellsupportchatbot",
+  "version": "1.0.0",
+  "description": "I work in team that use Powershell to monitor, update and fix any issues with M365 Communications. I would like to create  a chatbot that could help team members with powershell problems and solutions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
