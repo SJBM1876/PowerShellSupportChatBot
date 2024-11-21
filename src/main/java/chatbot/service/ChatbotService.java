@@ -1,42 +1,44 @@
 package chatbot.service;
 
-import chatbot.PowerShellChatbot;
+//import chatbot.PowerShellChatbot;
 import org.springframework.stereotype.Service;
+import chatbot.CommandHandler;
+import chatbot.ResponseGenerator;
+import chatbot.OpenAIClient;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.IOException;
+//import java.io.ByteArrayInputStream;
+//import java.io.ByteArrayOutputStream;
+//import java.io.PrintStream;
 
 @Service
 public class ChatbotService {
 
-    private final PowerShellChatbot chatbot;
+    private final CommandHandler commandHandler;
+    private final ResponseGenerator responseGenerator;
+    private final OpenAIClient openAIClient;
 
-    public ChatbotService() {
-        this.chatbot = new PowerShellChatbot();
+    public ChatbotService(CommandHandler commandHandler, ResponseGenerator responseGenerator, OpenAIClient openAIClient) {
+        this.commandHandler = commandHandler;
+        this.responseGenerator = responseGenerator;
+        this.openAIClient = openAIClient;
     }
 
     public String getChatResponse(String userInput) {
-        // Redirect user input to the chatbot
+        // Process user input using CommandHandler
+        String command = commandHandler.handleCommand(userInput);
+
+        // If CommandHandler returns a match, generate a response using ResponseGenerator
+        if (command != null) {
+            return responseGenerator.generateResponse(command);
+        }
+
+        // Otherwise, invoke OpenAIClient for assistance
         try {
-            // Simulate user input using ByteArrayInputStream
-            ByteArrayInputStream inputStream = new ByteArrayInputStream((userInput + "\nexit\n").getBytes());
-            System.setIn(inputStream);
-
-            // Capture chatbot output using ByteArrayOutputStream
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            PrintStream printStream = new PrintStream(outputStream);
-            System.setOut(printStream);
-
-            // Start the chatbot (this will process the input and then exit)
-            chatbot.start();
-
-            // Return the chatbot's response as a string
-            return outputStream.toString();
-        } finally {
-            // Restore the original System input/output streams
-            System.setIn(System.in);
-            System.setOut(System.out);
+            return openAIClient.getAIResponse(userInput);
+        } catch (IOException e) {
+            return "Sorry, there was an error connecting to the AI service.";
         }
     }
 }
+

@@ -3,6 +3,9 @@ package chatbot.controller;
 import chatbot.service.ChatbotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import chatbot.model.UserInput;
+import java.util.Map;
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/chat")
@@ -13,7 +16,9 @@ public class ChatbotController {
     private ChatbotService chatbotService;
 
     @PostMapping
-    public String chat(@RequestBody String userInput) {
-        return chatbotService.getChatResponse(userInput);
+    public Map<String, String> chat(@RequestBody UserInput userInput) {
+        String response = chatbotService.getChatResponse(userInput.getInput());
+        return Collections.singletonMap("message", response);
     }
+
 }
