@@ -8,7 +8,6 @@ function App() {
 
   // Set the welcome message when the component mounts
   useEffect(() => {
-    // Add the welcome message to the messages state
     setMessages([
       {
         sender: "bot",
@@ -21,12 +20,20 @@ function App() {
     e.preventDefault();
     if (!userInput.trim()) return;
 
+    // Ensure the user starts with "In PowerShell"
+    let commandInput = userInput.trim();
+
+    // Check if user starts their input with "In PowerShell", otherwise prepend it
+    if (!commandInput.toLowerCase().startsWith("in powershell")) {
+      commandInput = "In PowerShell " + commandInput;
+    }
+
     // Display user message
     setMessages((prev) => [...prev, { sender: "user", text: userInput }]);
 
     try {
       const response = await axios.post("http://localhost:8080/api/chat", {
-        message: userInput,
+        message: commandInput,
       });
 
       // Display chatbot response
@@ -46,6 +53,7 @@ function App() {
 
   return (
     <div className="chat-container">
+      <h1>PowerShell Support Chatbot</h1> {/* Add chatbot title */}
       <div className="chat-box">
         {messages.map((msg, idx) => (
           <div
@@ -77,6 +85,8 @@ function App() {
 }
 
 export default App;
+
+
 
 
 

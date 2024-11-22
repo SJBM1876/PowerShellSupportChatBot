@@ -13,8 +13,12 @@ import java.io.IOException;
 
 @Service
 public class ChatbotService {
-
-    private final CommandHandler commandHandler;
+/* The constructor takes three parameters (CommandHandler, ResponseGenerator, and OpenAIClient), representing the dependencies required by this class.
+These dependencies are injected when an instance of ChatbotService is created.
+The injected dependencies are assigned to the corresponding private fields.
+These fields are then available to be used throughout the class.
+ */
+    private final CommandHandler commandHandler; //final keyword ensures these fields are immutable
     private final ResponseGenerator responseGenerator;
     private final OpenAIClient openAIClient;
 
