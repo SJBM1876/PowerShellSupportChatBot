@@ -1,0 +1,5 @@
+service: PowerShellSupportChatBot
+
+build:
+  commands:
+    - apt-get update && apt-get install -y openjdk-23-jre
