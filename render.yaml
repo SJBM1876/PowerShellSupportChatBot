@@ -1,5 +1,7 @@
 service: PowerShellSupportChatBot
 
+env:
+  JAVA_OPTS: "-Xmx256m -Xms64m"  # Adjust memory settings as needed
+
 build:
-  commands:
-    - apt-get update && apt-get install -y openjdk-23-jre
+  image: heroku/java
