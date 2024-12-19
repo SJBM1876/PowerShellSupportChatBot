@@ -26,7 +26,7 @@ public class OpenAIClient {
     }
 
     public String getAIResponse(String prompt) throws IOException {
-        // Updated the model to gpt-3.5-turbo and increased max_tokens to 100 for longer responses
+        // Updated the model to gpt-3.5-turbo and increased max_tokens to 200 for longer responses
         String jsonPayload = "{ \"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": \"" + prompt + "\"}], \"max_tokens\": 200 }";
 
         RequestBody body = RequestBody.create(jsonPayload, MediaType.parse("application/json"));
