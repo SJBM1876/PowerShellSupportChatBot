@@ -1,7 +1,5 @@
 service: PowerShellSupportChatBot
 
-env:
-  JAVA_OPTS: "-Xmx256m -Xms64m"  # Adjust memory settings as needed
-
 build:
-  image: heroku/java
+  commands:
+    - java -version
