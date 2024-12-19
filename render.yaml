@@ -3,3 +3,8 @@ service: PowerShellSupportChatBot
 build:
   commands:
     - java -version
+
+env:
+  JAVA_VERSION: "23"
+
+runtime: "java"
