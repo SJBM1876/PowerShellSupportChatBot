@@ -1,6 +1,7 @@
 services:
   - type: web
     name: PowerShellSupportChatBot
+    runtime: node
     buildCommand: chmod +x ./mvnw
     startCommand: java -jar target/PowerShellSupportChatBot-0.0.1-SNAPSHOT.jar
     envVars:
