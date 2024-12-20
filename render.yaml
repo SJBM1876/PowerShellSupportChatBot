@@ -1,13 +1,10 @@
-service: PowerShellSupportChatBot
+services:
+  - type: web
+    name: PowerShellSupportChatBot
+    buildCommand: chmod +x ./mvnw
+    startCommand: java -jar target/PowerShellSupportChatBot-0.0.1-SNAPSHOT.jar
+    envVars:
+      - key: JAVA_HOME
+        value: /usr/lib/jvm/java-23-openjdk
 
-build:
-  commands:
-    - chmod +x ./mvnw  # Make the Maven wrapper executable
-    - ./mvnw clean install  # Build the project if needed
-    - java -version  # Check Java version for verification
-    - java -jar target/PowerShellSupportChatbot-0.0.1-SNAPSHOT.jar
 
-env:
-  JAVA_VERSION: "23"
-
-runtime: "java"
