@@ -1,0 +1,3 @@
+chatbot\CommandHandlerTest.class
+chatbot\ResponseGeneratorTest.class
+chatbot\OpenAIClientTest.class

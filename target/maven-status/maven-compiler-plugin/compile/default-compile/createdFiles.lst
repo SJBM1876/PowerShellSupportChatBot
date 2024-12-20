@@ -1,0 +1,9 @@
+chatbot\OpenAIClient.class
+chatbot\ResponseGenerator.class
+chatbot\Main.class
+chatbot\service\ChatbotService.class
+chatbot\PowerShellSupportChatbotApplication.class
+chatbot\CommandHandler.class
+chatbot\controller\ChatbotController.class
+chatbot\model\UserInput.class
+chatbot\PowerShellChatbot.class
