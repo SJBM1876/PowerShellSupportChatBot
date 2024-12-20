@@ -8,8 +8,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test"
   },
-
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "gh-pages": "^6.2.0"
+  }
 }
