@@ -53,6 +53,21 @@ public class OpenAIClient {
     }
 
     /**
+     * Helper method to ensure the response is related to PowerShell.
+     */
+    private String ensurePowerShellContext(String prompt) {
+        if (prompt == null || prompt.isEmpty()) {
+            return "In PowerShell";
+        }
+
+        // Check if the prompt already includes "in PowerShell".
+        if (!prompt.toLowerCase().contains("powershell")) {
+            prompt += "PowerShell";
+        }
+        return prompt.trim();
+    }
+
+    /**
      * Helper method to trim the text to the last complete sentence.
      */
     private String trimToCompleteSentence(String text) {

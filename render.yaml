@@ -3,7 +3,7 @@ services:
     name: PowerShellSupportChatBot
     runtime: node
     buildCommand: chmod +x ./mvnw
-    startCommand: cd powershell-chatbot && npm start
+    startCommand: java -jar target/PowerShellSupportChatbot-0.0.1-SNAPSHOT.jar
     envVars:
       - key: JAVA_HOME
         value: /usr/lib/jvm/java-23-openjdk

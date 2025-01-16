@@ -19,21 +19,23 @@ public class ChatbotController {
     }
 
     @PostMapping("/chat")
-    public ResponseEntity<Map<String, String>> chat(@RequestBody Map<String, String> request) {
-        // Extract the user message from the request body
+    public ResponseEntity<Map<String, Object>> chat(@RequestBody Map<String, String> request) {
         String userMessage = request.get("message");
 
-        // Get the bot's response (either from predefined commands or AI-generated response)
+        // Check if the user input is "exit"
+        boolean isExit = "exit".equalsIgnoreCase(userMessage.trim());
         String botResponse = chatbot.getResponse(userMessage);
 
-        // Ensure the response is in a consistent format
-        Map<String, String> response = new HashMap<>();
+        // Construct the response JSON with the exit flag
+        Map<String, Object> response = new HashMap<>();
         response.put("response", botResponse);
+        response.put("exit", isExit);
 
-        // Return the response as a JSON object with the "response" field
         return ResponseEntity.ok(response);
     }
 }
+
+
 
 
 

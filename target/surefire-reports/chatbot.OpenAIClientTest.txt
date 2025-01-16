@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: chatbot.OpenAIClientTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.080 s -- in chatbot.OpenAIClientTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.874 s -- in chatbot.OpenAIClientTest

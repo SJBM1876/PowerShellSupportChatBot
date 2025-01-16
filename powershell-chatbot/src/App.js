@@ -5,6 +5,7 @@ import "./App.css";
 function App() {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
+  const [isSessionActive, setIsSessionActive] = useState(true); // Track session status
 
   // Set the welcome message when the component mounts
   useEffect(() => {
@@ -18,15 +19,9 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!userInput.trim()) return;
+    if (!userInput.trim() || !isSessionActive) return;
 
-    // Ensure the user starts with "In PowerShell"
-    let commandInput = userInput.trim();
-
-    // Check if user starts their input with "In PowerShell", otherwise prepend it
-    if (!commandInput.toLowerCase().startsWith("in powershell")) {
-      commandInput = "In PowerShell " + commandInput;
-    }
+    const commandInput = userInput.trim();
 
     // Display user message
     setMessages((prev) => [...prev, { sender: "user", text: userInput }]);
@@ -41,6 +36,15 @@ function App() {
         ...prev,
         { sender: "bot", text: response.data.response },
       ]);
+
+      // Check if the chatbot session should end
+      if (response.data.exit) {
+        setIsSessionActive(false); // End the session
+        setMessages((prev) => [
+          ...prev,
+          { sender: "bot", text: "The session has ended. Refresh to start again." },
+        ]);
+      }
     } catch (error) {
       setMessages((prev) => [
         ...prev,
@@ -53,7 +57,7 @@ function App() {
 
   return (
     <div className="chat-container">
-      <h1>PowerShell Support Chatbot</h1> {/* Add chatbot title */}
+      <h1>PowerShell Support Chatbot</h1>
       <div className="chat-box">
         {messages.map((msg, idx) => (
           <div
@@ -63,28 +67,36 @@ function App() {
             }`}
           >
             {msg.text.split("\n").map((line, i) => (
-              <p key={i}>{line}</p> // Split the message into multiple lines
+              <p key={i}>{line}</p>
             ))}
           </div>
         ))}
       </div>
-      <form onSubmit={handleSubmit} className="chat-input-form">
-        <input
-          type="text"
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
-          placeholder="Type your message..."
-          className="chat-input"
-        />
-        <button type="submit" className="send-button">
-          Send
-        </button>
-      </form>
+      {isSessionActive ? (
+        <form onSubmit={handleSubmit} className="chat-input-form">
+          <input
+            type="text"
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            placeholder="Type your message..."
+            className="chat-input"
+          />
+          <button type="submit" className="send-button">
+            Send
+          </button>
+        </form>
+      ) : (
+        <div className="session-ended">
+          <p>The chatbot session has ended. Refresh the page to start again.</p>
+        </div>
+      )}
     </div>
   );
 }
 
 export default App;
+
+
 
 
 
